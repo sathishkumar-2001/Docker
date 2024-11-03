@@ -1,0 +1,9 @@
+DAY 1  -  Introduction to Containers
+
+we can create containers on top of vm or on top of physical servers
+
+containers are light weight in nature  -> they don't have any operating system they use the vm OS
+
+To create containers -> create Dockerfile -> Docker Engine -> to image -> containers
+
+Buildah is an open-source tool for building and managing container images, developed by Red Hat. It provides a command-line interface for building, modifying, and pushing images, serving as an alternative to Docker for creating container images without requiring a running daemon.
