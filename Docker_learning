@@ -121,3 +121,72 @@ An image is a read-only template with instructions for creating a Docker contain
 
 You might create your own images or you might only use those created by others and published in a registry. To build your own image, you create a Dockerfile with a simple syntax for defining the steps needed to create the image and run it. Each instruction in a Dockerfile creates a layer in the image. When you change the Dockerfile and rebuild the image, only those layers which have changed are rebuilt. This is part of what makes images so lightweight, small, and fast, when compared to other virtualization technologies.
 
+
+
+DAY - 3
+
+containerized  Django Application 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Multi stage docker build
+
+choose very rich base image like ubuntu that contains everything like curl , wget , etc
+
+https://github.com/GoogleContainerTools/distroless/tree/main
+
+distroless images is the very minimalistic images which contains only runtime
+
+Golang is statically build application , they don't even required runtime
+
+
+
+Docker Volumes and bind mounts
+
+Containers are ephemeral in nature  -> short lived
+They share everything from host machines
+
+Bind mounts -> directly attaching a directory from host machine to container
+
+Volumes  ->  Better lifecycle , it will create logical volume in the host machine
+
+docker volume ls
+docker volume create <volume name>
+docker volume inspect <volume name>
+docker volume rm <volume name>
+
+-v 
+--mount -> gives u more verbose option
+
+
+
+Docker  Networking
+
+Bridge Networking
+Host  Networking
+overlay Networking
+
+By default the container talks with host machine using  docker zero , docker create a virtual eth  -> Bridge networking  is the default network 
