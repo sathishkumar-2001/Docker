@@ -123,6 +123,7 @@ You might create your own images or you might only use those created by others a
 
 
 
+
 DAY - 3
 
 containerized  Django Application 
@@ -181,12 +182,81 @@ docker volume rm <volume name>
 -v 
 --mount -> gives u more verbose option
 
+Key Differences between Volumes and Bind Directory on a host as a Mount
+Volumes are managed, created, mounted and deleted using the Docker API. However, Volumes are more flexible than bind mounts, as they can be managed and backed up separately from the host file system, and can be moved between containers and hosts.
+
+In a nutshell, Bind Directory on a host as a Mount are appropriate for simple use cases where you need to mount a directory from the host file system into a container, while volumes are better suited for more complex use cases where you need more control over the data being persisted in the container.
 
 
 Docker  Networking
+Networking allows containers to communicate with each other and with the host system. Containers run isolated from the host system and need a way to communicate with each other and with the host system.
+
+By default, Docker provides two network drivers for you, the bridge and the overlay drivers.
+
+
 
 Bridge Networking
 Host  Networking
 overlay Networking
 
-By default the container talks with host machine using  docker zero , docker create a virtual eth  -> Bridge networking  is the default network 
+By default the container talks with host machine using  docker zero , docker create a virtual eth  -> Bridge networking  is the default network in which both ip will be in same subnet
+
+The conatiner won't bind any ip it will be using the host ip itself -> host networking
+
+Bridge Networking
+The default network mode in Docker. It creates a private network between the host and containers, allowing containers to communicate with each other and with the host system.
+
+If you want to secure your containers and isolate them from the default bridge network you can also create your own bridge network.
+
+docker network create -d bridge my_bridge
+
+
+Host Networking
+This mode allows containers to share the host system's network stack, providing direct access to the host system's network.
+
+To attach a host network to a Docker container, you can use the --network="host" option when running a docker run command. When you use this option, the container has access to the host's network stack, and shares the host's network namespace. This means that the container will use the same IP address and network configuration as the host.
+
+Here's an example of how to run a Docker container with the host network:
+
+docker run --network="host" <image_name> <command>
+Keep in mind that when you use the host network, the container is less isolated from the host system, and has access to all of the host's network resources. This can be a security risk, so use the host network with caution.
+
+Additionally, not all Docker image and command combinations are compatible with the host network, so it's important to check the image documentation or run the image with the --network="bridge" option (the default network mode) first to see if there are any compatibility issues.
+
+Overlay Networking
+This mode enables communication between containers across multiple Docker host machines, allowing containers to be connected to a single network even when they are running on different hosts.
+
+Macvlan Networking
+This mode allows a container to appear on the network as a physical host rather than as a container.
+
+
+Docker  Q/A
+
+what is docker?
+how conatiner is different from VM
+what is docker lifecycle
+what are different docker components
+difference between COPY and ADD 
+difference between ENTRYPOINT and CMD
+what are networking types in docker and what is default type
+Explain how to isolate networking between conatiners
+what is multi stage build in docker
+what is distroless images
+Real time challenges with docker
+   Docker is a single daemon process , which can cause a single point of failure . if the docker daemon goes down all the application are down
+   Docker daemon runs as a root user 
+   Resource constraint : if you are using too many containers in single host we can experience issues with resources , this can result in slow process and crashes
+   
+podman , buildhaa solves the issue of docker single daemon process
+
+What steps you to secure containers
+
+
+
+Docker-compose -> is used to manage multi container applications
+
+https://github.com/docker/awesome-compose/tree/master/flask
+
+
+docker init creates the Dockerfile  and compose.yml
+
