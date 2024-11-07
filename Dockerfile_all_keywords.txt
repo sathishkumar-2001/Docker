@@ -1,0 +1,40 @@
+Explanation of Keywords
+FROM: Specifies the base image; multi-stage is used to reduce the final image size.
+LABEL: Adds metadata to the image.
+WORKDIR: Sets the working directory for any subsequent instructions.
+ARG: Defines build-time variables, which can be passed at build time.
+ENV: Sets environment variables that persist in the container.
+COPY: Copies files from the host into the container.
+RUN: Executes commands during image build, like installing dependencies or building the project.
+EXPOSE: Declares the port on which the container will listen.
+VOLUME: Creates a mount point with a default location to store persistent data.
+HEALTHCHECK: Defines a command to check the container’s health.
+USER: Sets the default user.
+ONBUILD: A trigger instruction to execute when the image is used as a base for another Dockerfile.
+ENTRYPOINT: Configures a container to run as an executable.
+CMD: Sets the default command for the container, which can be overridden.
+
+STOPSIGNAL
+Defines the system call signal that will be sent to the container to exit.
+     STOPSIGNAL SIGTERM
+
+SHELL
+Allows you to specify the shell to use when running commands.
+By default, Linux containers use /bin/sh -c.
+
+ADD
+Similar to COPY but with added functionality. It can also extract compressed files (e.g., .tar, .tar.gz).
+Note: Best practice generally prefers COPY for straightforward copying, as ADD can introduce unexpected behavior with URL fetching and extraction.
+
+COPY --chown
+   COPY --chown=nginx:nginx app /usr/share/nginx/html
+
+COPY --from
+Used to copy files from a specific stage in a multi-stage build.
+Already indirectly used in the example provided, but worth noting as it can be combined with --chown.
+
+EXPOSE [PORT/PROTOCOL]
+You can optionally specify a protocol along with the port, like 80/tcp or 53/udp.
+
+
+
